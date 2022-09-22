@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "@octokit/core": "^3.5.1",
+    "got": "^11.8.1"
+  }
+}
