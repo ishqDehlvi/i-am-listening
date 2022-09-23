@@ -1,6 +1,6 @@
 {
   "dependencies": {
-    "@octokit/core": "^3.5.1",
+    "@octokit/core": "^3.2.5",
     "got": "^11.8.1"
   }
 }

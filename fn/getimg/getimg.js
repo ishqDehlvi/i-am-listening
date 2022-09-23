@@ -2,6 +2,7 @@ const { Octokit } = require("@octokit/core");
 
 const gtoken = process.env.G_TOKEN;
 // github personal access token - https://github.com/settings/tokens/new?scopes=repo
+
 const octokit = new Octokit({ auth: gtoken });
 
 const handler = async (event) => {
@@ -10,12 +11,12 @@ const handler = async (event) => {
     const fileInfo = await octokit.request(
       "GET /repos/{owner}/{repo}/contents/{path}",
       {
-        owner: "ishqdehlvi",
-        repo: "i-am-listening",
+        owner: "shivamjoker",
+        repo: "shivamjoker",
         path: "music-badge.svg",
-        ref: 'main'
       }
     );
+
     return {
       statusCode: 200,
       body: fileInfo.data.content,

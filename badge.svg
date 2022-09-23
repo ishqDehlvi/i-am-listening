@@ -1,28 +1,4 @@
-const fs = require('fs').promises;
-const { Octokit } = require('@octokit/core');
-
-const token = process.env.token;
-const gtoken = process.env.G_TOKEN;
-// github personal access token - https://github.com/settings/tokens/new?scopes=repo
-
-const octokit = new Octokit({ auth: gtoken });
-
-const handler = async (event) => {
-  if (event.headers.token !== token) {
-    return {
-      statusCode: 403,
-      body: 'Unauthorized',
-    };
-  }
-
-  try {
-    let { song, state } = event.queryStringParameters;
-    if (state !== 'playing') {
-      song = 'Nothing ^_^';
-    }
-
-    const svg = `
-    <svg xmlns="http://www.w3.org/2000/svg" width="547" height="59" viewBox="0 0 547 59" fill="none">
+ <svg xmlns="http://www.w3.org/2000/svg" width="547" height="59" viewBox="0 0 547 59" fill="none">
   <g filter="url(#filter0_i)">
     <rect width="547" height="59" rx="13" fill="#FF0000" />
   </g>
@@ -46,35 +22,3 @@ const handler = async (event) => {
     </filter>
   </defs>
 </svg>
-    `;
-
-    const buff = Buffer.from(svg, 'utf-8');
-
-    const fileInfo = await octokit.request(
-      'GET /repos/{owner}/{repo}/contents/{path}',
-      {
-        owner: 'shivamjoker',
-        repo: 'shivamjoker',
-        path: 'music-badge.svg',
-      }
-    );
-
-    await octokit.request('PUT /repos/{owner}/{repo}/contents/{path}', {
-      owner: 'shivamjoker',
-      repo: 'shivamjoker',
-      path: 'music-badge.svg',
-      message: `Updated to ${song}`,
-      sha: fileInfo.data.sha,
-      content: buff.toString('base64'),
-    });
-
-    return {
-      statusCode: 200,
-      body: JSON.stringify('Updated'),
-    };
-  } catch (error) {
-    return { statusCode: 500, body: error.toString() };
-  }
-};
-
-module.exports = { handler };
