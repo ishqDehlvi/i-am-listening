@@ -11,8 +11,8 @@ const handler = async (event) => {
     const fileInfo = await octokit.request(
       "GET /repos/{owner}/{repo}/contents/{path}",
       {
-        owner: "shivamjoker",
-        repo: "shivamjoker",
+        owner: "ishqdehlvi",
+        repo: "ishqdehlvi",
         path: "music-badge.svg",
       }
     );

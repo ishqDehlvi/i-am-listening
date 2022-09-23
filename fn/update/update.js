@@ -53,15 +53,15 @@ const handler = async (event) => {
     const fileInfo = await octokit.request(
       'GET /repos/{owner}/{repo}/contents/{path}',
       {
-        owner: 'shivamjoker',
-        repo: 'shivamjoker',
+        owner: 'ishqdehlvi',
+        repo: 'ishqdehlvi',
         path: 'music-badge.svg',
       }
     );
 
     await octokit.request('PUT /repos/{owner}/{repo}/contents/{path}', {
-      owner: 'shivamjoker',
-      repo: 'shivamjoker',
+      owner: 'ishqdehlvi',
+      repo: 'isqhdehlvi',
       path: 'music-badge.svg',
       message: `Updated to ${song}`,
       sha: fileInfo.data.sha,
